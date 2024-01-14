@@ -1,0 +1,5 @@
+# i rlly dk if these are really the names in pip but yeah
+
+bs4
+lxml
+requests

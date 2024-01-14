@@ -1,5 +1,6 @@
 from utils import randomString
 from requests import post, get
+from hpparser import findCode
 
 class Context:
     def __init__(self) -> None:
@@ -16,15 +17,16 @@ class Context:
             'Content-Type': 'application/x-www-form-urlencoded'
         })
          
-    def upload(self, title: str, fileName: str, contents, category: int = 1):
+    # Returns the show url
+    def upload(self, title: str, fileName: str, contents, category: int = 1) -> str:
         files = {
             'image': (fileName, contents, "image/png"),
         }
-
-
-        post('http://www.bancocn.com/admin/index.php', files=files, data={
+        
+        it = post('http://www.bancocn.com/admin/index.php', files=files, data={
             'category': category,
             'Add': 'Add',
             'title':  title
             }, cookies=self.cookies)
-
+        assert it.status_code == 200
+        return findCode(it.text, title).replace('..', 'http://www.bancocn.com')

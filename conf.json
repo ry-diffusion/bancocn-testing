@@ -1,4 +1,4 @@
 {
-	"IP_ADDR": "",
-	"PORT": 9999
+	"ip_addr": "test",
+	"port": 9999
 }

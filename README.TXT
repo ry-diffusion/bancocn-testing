@@ -16,5 +16,5 @@ $ nc -lnvp <SUA PORTA>
 
 * CREDITOS
  = RyDiffusion pelo código
- = openbsd60 pela ideia
+ = openbsd80 pela ideia
  = Pentest monkey pelo Reverse Shell: https://github.com/pentestmonkey/php-reverse-shell

